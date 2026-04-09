@@ -16,6 +16,7 @@ import AdminLayout from "./Components/Admin/AdminLayout";
 import AdminHomePage from "./Pages/AdminHomePage";
 import UserManagement from "./Components/Admin/UserManagement";
 import ProductManagement from "./Components/Admin/ProductManagement";
+import AdminCreateProduct from "./Components/Admin/AdminCreateProductPage"
 import EditProductPage from "./Components/Admin/EditProductPage";
 import OrderManagement from "./Components/Admin/OrderManagement";
 
@@ -60,6 +61,7 @@ const App = () => {
             <Route index element={<AdminHomePage />} />
             <Route path="users" element={<UserManagement />} />
             <Route path="products" element={<ProductManagement />} />
+            <Route path="products/create" element={<AdminCreateProduct />} />
             <Route path="products/:id/edit" element={<EditProductPage />} />
             <Route path="orders" element={<OrderManagement />} />
           </Route>

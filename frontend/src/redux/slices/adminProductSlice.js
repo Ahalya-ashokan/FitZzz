@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const API_URL = `${import.meta.env.VITE_BACKEND_URL}`;
-const USER_TOKEN = `Bearer ${localStorage.getItem("userToken")}`;
+const getToken = () => `Bearer ${localStorage.getItem("userToken")}`;
 
 //Async Thunk to fetch admin products
 
@@ -11,7 +11,7 @@ export const fetchAdminProducts = createAsyncThunk(
   async () => {
     const response = await axios.get(`${API_URL}/api/admin/products`, {
       headers: {
-        Authorization: USER_TOKEN,
+        Authorization: getToken(),
       },
     });
     return response.data;
@@ -28,7 +28,7 @@ export const createProduct = createAsyncThunk(
       productData,
       {
         headers: {
-          Authorization: USER_TOKEN,
+          Authorization: getToken(),
         },
       },
     );
@@ -46,7 +46,7 @@ export const updateProduct = createAsyncThunk(
       productData,
       {
         headers: {
-          Authorization: USER_TOKEN,
+          Authorization: getToken(),
         },
       },
     );
@@ -61,7 +61,7 @@ export const deleteProduct = createAsyncThunk(
   async (id) => {
     await axios.delete(`${API_URL}/api/admin/products/${id}`, {
       headers: {
-        Authorization: USER_TOKEN,
+        Authorization: getToken(),
       },
     });
     return id;
@@ -116,4 +116,4 @@ const adminProductSlice = createSlice({
   },
 });
 
-export default adminProductSlice.reducer
+export default adminProductSlice.reducer;

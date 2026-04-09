@@ -29,7 +29,6 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true,
   },
   brand: {
     type: String,
@@ -56,7 +55,6 @@ const productSchema = new mongoose.Schema({
     {
       url: {
         type: String,
-        required: true,
       },
       altText: {
         type: String,

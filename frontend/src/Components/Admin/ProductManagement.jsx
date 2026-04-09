@@ -1,13 +1,14 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   deleteProduct,
   fetchAdminProducts,
 } from "../../redux/slices/adminProductSlice";
 
 const ProductManagement = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector(
     (state) => state.adminProducts,
@@ -23,13 +24,18 @@ const ProductManagement = () => {
     }
   };
 
-
-  if(loading) return <p>Loading...</p>
-  if(error) return <p>Error:{error}</p>
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error:{error}</p>;
 
   return (
     <div className="max-w-7xl mx-auto p-6 ">
       <h2 className="text-2xl font-bold   mb-6">Product Management</h2>
+      <button
+        onClick={() => navigate("/admin/products/create")}
+        className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+      >
+        + Add Product
+      </button>
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="min-w-full text-left text-gray-500">
           <thead className="bg-gray-100 text-xs uppercase text-gray-700">

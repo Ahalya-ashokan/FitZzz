@@ -18,6 +18,33 @@ router.get("/", protect, admin, async (req, res) => {
   }
 });
 
+// route=>: POST /api/admin/products
+// desc: Create new product
+// access: private/Admin
+
+router.post("/", protect, admin, async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ message: "User not authenticated" });
+    }
+
+    const product = new Product({
+      ...req.body,
+      user: req.user._id,
+    });
+
+    const createdProduct = await product.save();
+    res.status(201).json(createdProduct);
+  } catch (error) {
+    console.error("ERROR:", error.message);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// route=>: PUT /api/admin/products
+// desc: edit product
+// access: private/Admin
+
 router.put("/:id", protect, admin, async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -49,6 +76,10 @@ router.put("/:id", protect, admin, async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 });
+
+// route=>: DELETE /api/admin/products
+// desc: Delete product
+// access: private/Admin
 
 router.delete("/:id", protect, admin, async (req, res) => {
   try {
