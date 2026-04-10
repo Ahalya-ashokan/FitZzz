@@ -12,9 +12,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, guestId, loading } = useSelector((state) => state.auth)(
-    (state) => state.auth,
-  );
+  const { user, guestId, loading } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
 
   //Get the Redirect parameter and check if it's checkout or something

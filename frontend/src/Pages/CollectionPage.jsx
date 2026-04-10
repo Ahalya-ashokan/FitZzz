@@ -1,4 +1,4 @@
-import React, { use, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import FilterSidebar from "../Components/Products/FilterSidebar";
 import SortOptions from "../Components/Products/SortOptions";
@@ -18,7 +18,7 @@ const CollectionPage = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   useEffect(() => {
     dispatch(fetchProductsByFilters({ collection, ...queryParams }));
-  }, [dispatch, collection,searchParams]);
+  }, [dispatch, collection, searchParams]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -37,8 +37,6 @@ const CollectionPage = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-
 
   return (
     <div className="flex flex-col lg:flex-row">
