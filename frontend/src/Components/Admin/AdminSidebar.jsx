@@ -4,6 +4,7 @@ import {
   FaSignOutAlt,
   FaStore,
   FaUser,
+  FaImage,
 } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -15,8 +16,8 @@ const AdminSidebar = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logout())
-    dispatch(clearCart())
+    dispatch(logout());
+    dispatch(clearCart());
     navigate("/");
   };
   return (
@@ -60,6 +61,17 @@ const AdminSidebar = () => {
         >
           <FaClipboardList />
           <span>Orders</span>
+        </NavLink>
+        <NavLink
+          to="/admin/site-content"
+          className={({ isActive }) =>
+            isActive
+              ? "bg-gray-700 text-white py-3 px-4 rounded flex items-center space-x-2"
+              : "text-gray-300 hover:bg-gray-700 hover:text-white py-3 px-4 rounded flex items-center space-x-2"
+          }
+        >
+          <FaImage />
+          <span>Site Content</span>
         </NavLink>
         <NavLink
           to="/"

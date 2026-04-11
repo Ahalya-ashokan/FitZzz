@@ -55,7 +55,7 @@ export const fetchProductDetails = createAsyncThunk(
 // Async Thunk to fetch similar products
 
 export const updateProduct = createAsyncThunk(
-  "products/ updateProducts",
+  "products/updateProducts",
   async ({ id, productData }) => {
     const response = await axios.put(
       `${import.meta.env.VITE_BACKEND_URL}/api/products/${id}`,
@@ -73,7 +73,7 @@ export const updateProduct = createAsyncThunk(
 //Async Thunk to fetch similar products(product related to given product-ID)
 
 export const fetchSimilarProducts = createAsyncThunk(
-  "produts/fetchSimilarProducts",
+  "products/fetchSimilarProducts",
   async ({ id }) => {
     const response = await axios.get(
       `${import.meta.env.VITE_BACKEND_URL}/api/products/similar/${id}`,
@@ -164,7 +164,7 @@ const productsSlice = createSlice({
         state.loading = false;
         const updatedProduct = action.payload;
         const index = state.products.findIndex(
-          (product) => product._id === updateProduct._id,
+          (product) => product._id === action.payload._id,
         );
         if (index !== -1) {
           state.products[index] = updatedProduct;

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import register from "../assets/register.webp";
 import { registerUser } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { mergeCart } from "../redux/slices/cartSlice";
@@ -14,6 +13,8 @@ const Register = () => {
   const location = useLocation();
   const { user, guestId, loading } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
+  
+    const { content } = useSelector((state) => state.siteContent);
 
   //Get the Redirect parameter and check if it's checkout or something
   const redirect = new URLSearchParams(location.search).get("redirect") || "/";
@@ -30,6 +31,8 @@ const Register = () => {
       }
     }
   }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch]);
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +51,7 @@ const Register = () => {
           </div>
           <h2 className="text-2xl font-bold text-center mb-6 ">Hey there!👋</h2>
           <p className="text-center mb-6 ">
-            Enter your username and password to login
+            Create your account to get started
           </p>
           <div className="mb-4 ">
             <label className="block text-sm font-semibold mb-2">Name</label>
@@ -87,7 +90,7 @@ const Register = () => {
             {loading ? "Loading..." : "Sign Up"}
           </button>
           <p className="mt-6 text-center text-sm ">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <Link
               to={`/login?redirect=${encodeURIComponent(redirect)}`}
               className="text-blue-500"
@@ -100,8 +103,8 @@ const Register = () => {
       <div className="hidden md:block w-1/2 bg-gray-800">
         <div className="h-full flex flex-col justify-center items-center">
           <img
-            src={register}
-            alt="Login to Account"
+            src={content?.registerBanner || "/images/register-fallback.jpg"}
+            alt="Register to FitZzz"
             className="h-[750px] w-full object-cover"
           />
         </div>

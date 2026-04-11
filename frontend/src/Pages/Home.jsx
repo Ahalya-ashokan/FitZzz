@@ -14,6 +14,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { products, loading, error } = useSelector((state) => state.products);
   const [bestSellerproduct, setBestSellerProduct] = useState(null);
+  const { content } = useSelector((state) => state.siteContent);
 
   useEffect(() => {
     //Fetch Prducts for a specific Collection
@@ -24,6 +25,7 @@ const Home = () => {
         limit: 8,
       }),
     );
+
     //Fetch Best seller products
     const fetchBestSeller = async () => {
       try {
@@ -35,22 +37,22 @@ const Home = () => {
         console.error(error);
       }
     };
-    fetchBestSeller()
-  },[dispatch]);
-
+    fetchBestSeller();
+  }, [dispatch]);
 
   return (
     <div>
-      <Hero />
+      <Hero image={content?.homeBanner || "/images/fallback.jpg"} />
       <GenderCollectionSection />
       <NewArrivals />
 
       {/* Best seller */}
       <h2 className="text-3xl text-center font-bold mb-4">Best Seller</h2>
-      {bestSellerproduct ? (<ProductDetails productId={bestSellerproduct._id } />) : (
+      {bestSellerproduct ? (
+        <ProductDetails productId={bestSellerproduct._id} />
+      ) : (
         <p className="text-center">Loading Best seller products ...</p>
       )}
-      
 
       <div className="container mx-auto">
         <h2 className="text-3xl text-center font-bold mb-4">

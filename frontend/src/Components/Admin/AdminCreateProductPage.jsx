@@ -96,7 +96,6 @@ const AdminCreateProduct = () => {
 
         collections: formData.collections || "",
 
-        // ✅ THIS IS THE CORRECT LINE
         images: formData.images,
       }),
     )
@@ -106,115 +105,97 @@ const AdminCreateProduct = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-8 text-center">Create Product</h2>
+    <div className="max-w-6xl mx-auto p-6">
+      <h2 className="text-3xl font-bold mb-8 text-gray-800">
+        🛍️ Create Product
+      </h2>
 
       <form
         onSubmit={handleSubmit}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow"
+        className="bg-white p-8 rounded-3xl shadow-2xl space-y-10"
       >
-        <input
-          name="name"
-          placeholder="Name"
-          onChange={handleChange}
-          className="input"
-        />
+        {/* Basic Info */}
+        <div className="bg-gray-50 p-6 rounded-2xl shadow-inner">
+          <h3 className="text-xl font-semibold mb-4 text-gray-700">
+            Basic Info
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input name="name" placeholder="Product Name" />
+            <input name="price" type="number" placeholder="Price" />
+            <input name="countInStock" type="number" placeholder="Stock" />
+            <input name="sku" placeholder="SKU" />
+          </div>
 
-        <input
-          name="price"
-          type="number"
-          placeholder="Price"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <textarea
-          name="description"
-          placeholder="Description"
-          onChange={handleChange}
-          className="input md:col-span-2"
-        />
-
-        <input
-          name="countInStock"
-          type="number"
-          placeholder="Stock"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <input
-          name="sku"
-          placeholder="SKU"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <input
-          name="category"
-          placeholder="Category"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <input
-          name="brand"
-          placeholder="Brand"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <input
-          name="sizes"
-          placeholder="Sizes (S,M,L)"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <input
-          name="colors"
-          placeholder="Colors (Red,Blue)"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <input
-          name="collections"
-          placeholder="Collections"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <input
-          name="material"
-          placeholder="Material"
-          onChange={handleChange}
-          className="input"
-        />
-
-        <select name="gender" onChange={handleChange} className="input">
-          <option value="">Select Gender</option>
-          <option value="Men">Men</option>
-          <option value="Women">Women</option>
-          <option value="Unisex">Unisex</option>
-        </select>
-
-        <input type="file" onChange={handleImageUpload} />
-
-        {uploading && <p>Uploading...</p>}
-
-        <div className="flex gap-3 mt-3">
-          {formData.images.map((img, index) => (
-            <img
-              key={index}
-              src={img.url}
-              alt="preview"
-              className="w-20 h-20 object-cover rounded"
-            />
-          ))}
+          <textarea
+            name="description"
+            placeholder="Product Description"
+            onChange={handleChange}
+            className="w-full mt-4 p-3 rounded-xl border border-gray-200 shadow-sm focus:shadow-md focus:ring-2 focus:ring-blue-500 outline-none transition"
+          />
         </div>
 
-        <button className="md:col-span-2 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+        {/* Details */}
+        <div className="bg-gray-50 p-6 rounded-2xl shadow-inner">
+          <h3 className="text-xl font-semibold mb-4 text-gray-700">Details</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input name="category" placeholder="Category" />
+            <input name="brand" placeholder="Brand" />
+            <input name="material" placeholder="Material" />
+            <input name="collections" placeholder="Collection" />
+
+            <input name="sizes" placeholder="Sizes (S,M,L)" />
+            <input name="colors" placeholder="Colors (Red,Blue)" />
+
+            <select
+              name="gender"
+              onChange={handleChange}
+              className="w-full p-3 rounded-xl border border-gray-200 shadow-sm focus:shadow-md focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="">Select Gender</option>
+              <option value="Men">Men</option>
+              <option value="Women">Women</option>
+              <option value="Unisex">Unisex</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Image Upload */}
+        <div className="bg-gray-50 p-6 rounded-2xl shadow-inner">
+          <h3 className="text-xl font-semibold mb-4 text-gray-700">
+            Product Images
+          </h3>
+
+          <label className="cursor-pointer inline-block bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-xl shadow hover:scale-105 transition">
+            Upload Image
+            <input
+              type="file"
+              onChange={handleImageUpload}
+              className="hidden"
+            />
+          </label>
+
+          {uploading && (
+            <p className="mt-3 text-sm text-gray-500">Uploading...</p>
+          )}
+
+          <div className="flex gap-4 mt-6 flex-wrap">
+            {(formData.images || []).map((img, index) => (
+              <div
+                key={index}
+                className="relative group rounded-xl overflow-hidden shadow-md"
+              >
+                <img
+                  src={img?.url}
+                  alt="preview"
+                  className="w-24 h-24 object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Submit */}
+        <button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-3 rounded-2xl text-lg font-semibold shadow-lg hover:scale-[1.02] transition">
           Create Product
         </button>
       </form>

@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom";
-import mensCollectionImage from "../../assets/mens-collection.webp";
-import womensCollectionImage from "../../assets/womens-collection.webp";
+import { useSelector } from "react-redux";
 
 const GenderCollectionSection = () => {
+  
+  const { content } = useSelector((state) => state.siteContent);
+
+
   return (
     <section className=" py-16 px-4 lg:px-0">
       <div className="container mx-auto flex flex-col md:flex-row gap-8 ">
         {/* womens collection */}
         <div className="relative flex-1 ">
           <img
-            src={womensCollectionImage}
-            alt=" Women's collecction"
+            src={
+              content?.womenCollectionBanner ||
+              "/images/womenCollectionBanner-fallback.jpg"
+            }
+            alt="Women's collecction"
             className="w-full h-[700px] object-cover"
           />
           <div className="absolute bottom-8 left-8 bg-white opacity-90 p-4">
@@ -28,8 +34,11 @@ const GenderCollectionSection = () => {
         {/* Men's collection */}
         <div className="relative flex-1 ">
           <img
-            src={mensCollectionImage}
-            alt=" Men's collecction"
+            src={
+              content?.menCollectionBanner ||
+              "/images/menCollectionBanner-fallback.jpg"
+            }
+            alt="Men's collecction"
             className="w-full h-[700px] object-cover"
           />
           <div className="absolute bottom-8 left-8 bg-white opacity-90 p-4">

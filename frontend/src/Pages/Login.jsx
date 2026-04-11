@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import login from "../assets/login.webp";
 import { loginUser } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { mergeCart } from "../redux/slices/cartSlice";
@@ -13,6 +12,8 @@ const Login = () => {
   const location = useLocation();
   const { user, guestId, loading } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
+  
+    const { content } = useSelector((state) => state.siteContent);
 
   //Get the Redirect parameter and check if it's checkout or something
   const redirect = new URLSearchParams(location.search).get("redirect") || "/";
@@ -29,6 +30,8 @@ const Login = () => {
       }
     }
   }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch]);
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,7 +79,10 @@ const Login = () => {
           </button>
           <p className="mt-6 text-center text-sm ">
             Don't have an account?{" "}
-            <Link to={`/register?redirect=${encodeURIComponent(redirect)}`} className="text-blue-500">
+            <Link
+              to={`/register?redirect=${encodeURIComponent(redirect)}`}
+              className="text-blue-500"
+            >
               Register
             </Link>{" "}
           </p>
@@ -85,7 +91,7 @@ const Login = () => {
       <div className="hidden md:block w-1/2 bg-gray-800">
         <div className="h-full flex flex-col justify-center items-center">
           <img
-            src={login}
+            src={content?.loginBanner || "/images/login-fallback.jpg"}
             alt="Login to Account"
             className="h-[750px] w-full object-cover"
           />

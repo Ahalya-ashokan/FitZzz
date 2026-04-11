@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import featured from "../../assets/featured.webp"
 
 const FeaturedCollection = () => {
+  const { content } = useSelector((state) => state.siteContent);
+
   return (
     <section className="py-16 px-4 lg:px-0 ">
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center bg-green-50 rounded-3xl">
@@ -28,7 +30,14 @@ const FeaturedCollection = () => {
         </div>
         {/* right content */}
         <div className="lg:w-1/2 ">
-        <img src={featured} alt="Featured Collection" className="w-full h-full object-cover lg:rounded-tr-3xl lg:rounded-br-3xl" />
+          <img
+            src={
+              content?.featuredCollectionBanner ||
+              "/images/featuredCollectionBanner-fallback.jpg"
+            }
+            alt="Featured Collection"
+            className="w-full h-full object-cover lg:rounded-tr-3xl lg:rounded-br-3xl"
+          />
         </div>
       </div>
     </section>
