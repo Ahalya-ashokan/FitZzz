@@ -50,29 +50,42 @@ const EditProductPage = () => {
   };
 
   const handleImageUpload = async (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append("image", file);
+  const file = e.target.files[0];
 
-    try {
-      setUploading(true);
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/upload`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        },
-      );
-      setProductData((prevData) => ({
-        ...prevData,
-        images: [...prevData.images, { url: data.imageUrl, altText: "" }],
-      }));
-      setUploading(false);
-    } catch (error) {
-      console.error(error);
-      setUploading(false);
-    }
-  };
+  if (!file) {
+    console.log("No file selected");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", file);
+
+  try {
+    setUploading(true);
+
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/api/upload`,
+      formData,
+      {
+        headers: { "Content-Type": "multipart/form-data" },
+      }
+    );
+
+    setProductData((prevData) => ({
+      ...prevData,
+      images: [
+        ...(prevData.images || []),
+        { url: data.imageUrl, altText: "" },
+      ],
+    }));
+
+    setUploading(false);
+  } catch (error) {
+    console.error("UPLOAD ERROR:", error.response?.data || error.message);
+    setUploading(false);
+  }
+};
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateProduct({ id, productData }));

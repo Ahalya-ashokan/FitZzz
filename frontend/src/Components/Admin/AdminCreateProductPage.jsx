@@ -120,10 +120,10 @@ const AdminCreateProduct = () => {
             Basic Info
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input name="name" placeholder="Product Name" />
-            <input name="price" type="number" placeholder="Price" />
-            <input name="countInStock" type="number" placeholder="Stock" />
-            <input name="sku" placeholder="SKU" />
+            <input name="name" placeholder="Product Name" onChange={handleChange} />
+            <input name="price" type="number" placeholder="Price" onChange={handleChange} />
+            <input name="countInStock" type="number" placeholder="Stock" onChange={handleChange} />
+            <input name="sku" placeholder="SKU" onChange={handleChange} />
           </div>
 
           <textarea
@@ -138,13 +138,13 @@ const AdminCreateProduct = () => {
         <div className="bg-gray-50 p-6 rounded-2xl shadow-inner">
           <h3 className="text-xl font-semibold mb-4 text-gray-700">Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input name="category" placeholder="Category" />
-            <input name="brand" placeholder="Brand" />
-            <input name="material" placeholder="Material" />
-            <input name="collections" placeholder="Collection" />
+            <input name="category" placeholder="Category" onChange={handleChange} />
+            <input name="brand" placeholder="Brand" onChange={handleChange} />
+            <input name="material" placeholder="Material" onChange={handleChange} />
+            <input name="collections" placeholder="Collection" onChange={handleChange} />
 
-            <input name="sizes" placeholder="Sizes (S,M,L)" />
-            <input name="colors" placeholder="Colors (Red,Blue)" />
+            <input name="sizes" placeholder="Sizes (S,M,L)" onChange={handleChange} />
+            <input name="colors" placeholder="Colors (Red,Blue)" onChange={handleChange} />
 
             <select
               name="gender"

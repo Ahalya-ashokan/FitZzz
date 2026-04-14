@@ -11,7 +11,7 @@ const FilterSidebar = () => {
     material: [],
     brand: [],
     minPrice: 0,
-    maxPrice: 2000,
+    maxPrice: 3000,
   });
 
   const [priceRange, setPriceRange] = useState([0, 2000]);
@@ -23,11 +23,12 @@ const FilterSidebar = () => {
     "Black",
     "Yellow",
     "Green",
-    "Gray",
+    "Grey",
     "White",
     "Pink",
     "Beige",
-    "Navy",
+    "Navy Blue",
+    "Light Grey",
   ];
 
   const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
@@ -42,12 +43,12 @@ const FilterSidebar = () => {
     "Fleece",
   ];
   const brands = [
-    "Urban Threds",
-    "Modern Fit",
-    "Street Style",
-    "Beach Breeze",
-    "Fashionista",
-    "ChicStyle",
+    "Bonkers",
+    "Adidas",
+    "Roadster",
+    "Max",
+    "Urban Monkey",
+    "Retro",
   ];
   const genders = ["Men", "Women"];
 
@@ -95,13 +96,13 @@ const FilterSidebar = () => {
     navigate(`?${params.toString()}`);
   };
 
-  const handlePriceChange=(e)=>{
-    const newPrice = e.target.value
-    setPriceRange([0, newPrice])
-    const newFilters= {...filters, minPrice:0, maxPrice:newPrice}
-    setFilters(newFilters)
-    updateURLParams(newFilters)
-  }
+  const handlePriceChange = (e) => {
+    const newPrice = e.target.value;
+    setPriceRange([0, newPrice]);
+    const newFilters = { ...filters, minPrice: 0, maxPrice: newPrice };
+    setFilters(newFilters);
+    updateURLParams(newFilters);
+  };
 
   return (
     <div className="p-4 ">
@@ -181,7 +182,7 @@ const FilterSidebar = () => {
         ))}
       </div>
 
-      {/* MAterial filter */}
+      {/* Material filter */}
       <div className="mb-6 ">
         <label className="block text-gray-600 font-medium mb-2">Material</label>
         {materials.map((material) => (
